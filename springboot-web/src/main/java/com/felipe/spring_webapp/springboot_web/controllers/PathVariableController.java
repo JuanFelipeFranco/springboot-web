@@ -2,6 +2,7 @@ package com.felipe.spring_webapp.springboot_web.controllers;
 
 import com.felipe.spring_webapp.springboot_web.models.User;
 import com.felipe.spring_webapp.springboot_web.models.dto.ParamDto;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -10,6 +11,15 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/var")
 public class PathVariableController {
+
+    @Value("${config.username}")
+    private String username;
+    @Value("${config.message}")
+    private String message;
+    @Value("${config.listOfValues}")
+    private String listOfValues;
+    @Value("${config.code}")
+    private Integer code;
     @GetMapping("/baz/{message}")
     public ParamDto baz(@PathVariable String message){
         ParamDto paramDto = new ParamDto();
@@ -31,6 +41,8 @@ public class PathVariableController {
         user.setName(user.getName().toUpperCase());
         return user;
     }
+
+
 
 
 
