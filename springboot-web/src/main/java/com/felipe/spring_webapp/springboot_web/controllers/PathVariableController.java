@@ -42,6 +42,16 @@ public class PathVariableController {
         return user;
     }
 
+    @GetMapping("/values")
+    public Map<String, Object> values(){
+        Map<String,Object> json = new HashMap<>();
+        json.put("username",username);
+        json.put("code",code);
+        json.put("message",message);
+        json.put("listOfValues",listOfValues);
+        return json;
+    }
+
 
 
 
