@@ -26,6 +26,15 @@ public class PathVariableController {
     private List<String> valueList;
     @Value("#{'${config.listOfValues}'.toUpperCase()}")
     private String valueString;
+
+    @Value("#{${config.valuesMap}}")
+    private Map<String, Object> valuesMap;
+
+    @Value("#{${config.valuesMap}.product}")
+    private String product;
+
+    @Value("#{${config.valuesMap}.price}")
+    private Long price;
     @GetMapping("/baz/{message}")
     public ParamDto baz(@PathVariable String message){
         ParamDto paramDto = new ParamDto();
@@ -57,6 +66,9 @@ public class PathVariableController {
         json.put("listOfValues",listOfValues);
         json.put("valueList",valueList);
         json.put("valueString",valueString);
+        json.put("valueMap",valuesMap);
+        json.put("product",product);
+        json.put("price",price);
         return json;
     }
 
