@@ -2,7 +2,9 @@ package com.felipe.spring_webapp.springboot_web.controllers;
 
 import com.felipe.spring_webapp.springboot_web.models.User;
 import com.felipe.spring_webapp.springboot_web.models.dto.ParamDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -35,6 +37,9 @@ public class PathVariableController {
 
     @Value("#{${config.valuesMap}.price}")
     private Long price;
+
+    @Autowired
+    private Environment environment;
     @GetMapping("/baz/{message}")
     public ParamDto baz(@PathVariable String message){
         ParamDto paramDto = new ParamDto();
@@ -59,10 +64,14 @@ public class PathVariableController {
 
     @GetMapping("/values")
     public Map<String, Object> values(){
+        Long code2 = environment.getProperty("config.code", Long.class);
+        
         Map<String,Object> json = new HashMap<>();
         json.put("username",username);
         json.put("code",code);
+        json.put("code2",code2);
         json.put("message",message);
+        json.put("message2",environment.getProperty("config.message"));
         json.put("listOfValues",listOfValues);
         json.put("valueList",valueList);
         json.put("valueString",valueString);
