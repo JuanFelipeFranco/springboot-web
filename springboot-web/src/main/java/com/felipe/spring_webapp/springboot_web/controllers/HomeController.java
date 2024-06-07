@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     @GetMapping({"","/","home"})
     public String home(){
-
-        return "redirect:/list"; //ruta que redirecciona al listado, ya que muestra el nuevo usuario agregado
+        return "forward:/list";
+        //return "redirect:/list"; //ruta que redirecciona al listado, ya que muestra el nuevo usuario agregado
     }
 }
